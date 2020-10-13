@@ -11,11 +11,15 @@
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     </head>
     <body>
+
         <!-- NavBar -->
+
         <div class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="navbar-brand"><i class="fas fa-home"></i> Welcome to Vue</div>
         </div>
+
         <!-- Content -->
+
         <div class="container">
             <div class="row">
                 <div class="col form-group"><h1>Simple Vue application</h1></div>
@@ -30,42 +34,100 @@
                     <div class="card-body">
                         <div class="card-title" id="firstDiv">The counter</div> 
                         <div class="card-text">
-                            <p>Number is: <span>{{number}}</span></p>
-                            <span><button id="incButton" class="btn btn-primary" v-on:click="increaseNumber">Increase</button>
-                            <button id="decButton" class="btn btn-primary" v-on:click="decreaseNumber">Decrease</button></span>
+                            <p>
+                                <span>
+                                    <button id="incButton" class="btn btn-success" 
+                                    v-on:click="increaseNumber" 
+                                    v-bind:class="{disabled: incDisabled}">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button id="decButton" class="btn btn-danger" 
+                                    v-on:click="decreaseNumber" 
+                                    v-bind:class="{disabled: decDisabled}">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </span>
+                                Number is: <span style="min-width: 4em;">{{number}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id="secondVue" class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <div class="card-title">
+                            Increase status:
+                        </div>
+                        <div class="card-text">
+                            <p v-if="incDisabled" style="color: red;">Disabled</p>
+                            <p v-else style="color: green;">Enabled</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="thirdVue" class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <div class="card-title">
+                            Decrease status:
+                        </div>
+                        <div class="card-text">
+                            <p v-if="decDisabled" style="color: red;">Disabled</p>
+                            <p v-else style="color: green;">Enabled</p>                
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Placeholder for the footer -->
-        <footer></footer>
 
-        <!-- Vue App scripts from here-->
+        <!-- Placeholder for the footer -->
+
+        <footer>
+
+        </footer>
+
+        <!-- Vue App scripts from here -->
+
         <script>
             var firstDivView = new Vue({
                 el: '#myNumber',
                 data: {
-                    number: 1
+                    number: 1,
+                    maxVal: 10,
+                    minVal: 0,
+                    incDisabled: false,
+                    decDisabled: false,
                 },
                 methods: {
-                    setButtonStates: function () {
-                        $("#decButton").attr('disabled', this.number < 1);
-                        $("#incButton").attr('disabled', this.number >= 10);
-                    },
                     increaseNumber: function(event) {
+                        if (this.incDisabled) {
+                            return;
+                        }
                         this.number++;
-                        this.setButtonStates();
+                        this.incDisabled = this.number >= this.maxVal;
+                        this.decDisabled = this.number < this.minVal + 1;
                     },
                     decreaseNumber: function(event) {
+                        if (this.decDisabled) {
+                            return;
+                        }
                         this.number--;
-                        this.setButtonStates();
+                        this.incDisabled = this.number >= this.maxVal;
+                        this.decDisabled = this.number < this.minVal + 1;
                     },
                 }
             });
 
+            var secondVue = new Vue({
+                el: "#secondVue",
+                data: firstDivView.$data,
+            });
+
+            var thirddVue = new Vue({
+                el: "#thirdVue",
+                data: firstDivView.$data,
+            });
+
             firstDivView.$watch('number', function() {
-                alert('Number has been changed!');
+               // alert('Number has been changed!');
+               return;
             });
 
         </script>
