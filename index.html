@@ -9,6 +9,14 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
             integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+        <style>
+            .cursordisabled {
+                cursor: default;
+            }
+            .cursorenabled {
+                cursor: pointer;
+            }
+        </style>
     </head>
     <body>
 
@@ -38,7 +46,8 @@
                                 <span>
                                     <button id="incButton" class="btn btn-success" 
                                     v-on:click="increaseNumber" 
-                                    v-bind:class="{disabled: incDisabled}">
+                                    v-bind:class="{disabled: incDisabled}"
+                                    >
                                         <i class="fas fa-arrow-up"></i>
                                     </button>
                                     <button id="decButton" class="btn btn-danger" 
@@ -125,9 +134,9 @@
                 data: firstDivView.$data,
             });
 
-            firstDivView.$watch('number', function() {
-               // alert('Number has been changed!');
-               return;
+            firstDivView.$watch('number', function(value) {
+                $("#incButton").prop('disabled', (value >= firstDivView.$data.maxVal));
+                $("#decButton").prop('disabled', (value < firstDivView.$data.minVal + 1));
             });
 
         </script>
