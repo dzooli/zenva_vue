@@ -9,14 +9,6 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
             integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-        <style>
-            .cursordisabled {
-                cursor: default;
-            }
-            .cursorenabled {
-                cursor: pointer;
-            }
-        </style>
     </head>
     <body>
 
@@ -134,6 +126,8 @@
                 data: firstDivView.$data,
             });
 
+            // We need to add the 'disabled' property instead of the class to avoid Bootstrap cursor override
+            // Bootsrtap sets the cursor to 'pointer' if the element hasn't explicit 'disabled' prop
             firstDivView.$watch('number', function(value) {
                 $("#incButton").prop('disabled', (value >= firstDivView.$data.maxVal));
                 $("#decButton").prop('disabled', (value < firstDivView.$data.minVal + 1));
