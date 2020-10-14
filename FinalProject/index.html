@@ -16,26 +16,58 @@
                 clear: both;
                 float: left;
             }
-            #singleBlogPost {
-                border-width: 2px;
-                border-style: solid;
-                border-color: blue;
-                padding: 8px;
+            #post-title {
+                font-weight: bold;
             }
+            #post-date: {
+                float: right;
+            }
+            #post-user {
+                font-style: italic;
+            }
+            .card {
+                margin-bottom: 8px;
+            }
+
         </style>
     </head>
     <body>
         <h1>Welcome to my Blog Site</h1>
 
         <div id='blogPosts'>
-            <div id='singleBlogPost'>
-                <h2>{{blogpost.title}}</h2>
-                <h3>{{blogpost.username}}</h3>
-                <h4>{{blogpost.date}}</h4>
-                <div>{{blogpost.content}}</div>
-            </div>
+            <blog-post
+            v-for='post in posts'
+            v-bind:blogpost = 'post'
+            ></blog-post>
         </div>
 
+        <script>
+
+            Vue.component('blog-post', {
+                props: ['blogpost'],
+                template: `<div id='singleBlogPost' class="card">
+                    <div class="card-body">
+                    <div class="card-title">
+                        
+                        <span id='post-title'>{{blogpost.title}}</span>
+                        by <span id='post-user'>{{blogpost.username}}</span>
+                        @ <span id='post-date'>{{blogpost.date}}</span>
+                        
+                    </div>
+                    <div class="card-text">{{blogpost.content}}</div>
+                    </div></div>`,
+            });
+            var blogView = new Vue({
+                el: '#blogPosts',
+                data: {
+                    posts: [
+                        {title: 'First post', username: 'Zoltan', date: '2020-10-15', content: 'This is the content of my very interesting first blog post using Vue. I hope you like it.'},
+                        {title: 'Second post', username: 'Zoltan Again', date: '2020-10-14', content: 'This is the content of my very interesting second blog post. Feel free to ask questions or contact me for further information.'},
+                    ],
+                },
+            });
+
+        </script>
         <!-- Bootstrap scripts -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
             integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
