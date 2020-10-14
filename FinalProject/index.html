@@ -9,8 +9,32 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
             integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+        <style>
+            html, body {
+                padding: 12px;
+                clear: both;
+                float: left;
+            }
+            #singleBlogPost {
+                border-width: 2px;
+                border-style: solid;
+                border-color: blue;
+                padding: 8px;
+            }
+        </style>
     </head>
     <body>
+        <h1>Welcome to my Blog Site</h1>
+
+        <div id='blogPosts'>
+            <div id='singleBlogPost'>
+                <h2>{{blogpost.title}}</h2>
+                <h3>{{blogpost.username}}</h3>
+                <h4>{{blogpost.date}}</h4>
+                <div>{{blogpost.content}}</div>
+            </div>
+        </div>
 
         <!-- Bootstrap scripts -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
