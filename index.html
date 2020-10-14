@@ -31,6 +31,7 @@
             </div>
             <div class="flex-conatiner" style="display: flex; justify-content: center;">
                 <div id="myNumber" class="card" style="width: 18rem;">
+                    <!-- Up-Down control -->
                     <div class="card-body">
                         <div class="card-title" id="firstDiv">The counter</div> 
                         <div class="card-text">
@@ -53,6 +54,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Button status indicators -->
                 <div id="secondVue" class="card" style="width: 18rem;">
                     <div class="card-body">
                         <div class="card-title">
@@ -76,6 +78,7 @@
                     </div>
                 </div>
             </div>
+            <!-- A form with validation -->
             <h2>(Almost) horizontal form</h2>
             <form id="nameInputForm" class="form-horizontal">
                 <div class="form-group">
@@ -100,12 +103,14 @@
                     </div>
                 </div>
             </form>
+            <!-- Basic composite component -->
             <h2>Basic component</h2>
             <div id="groceryDiv">
                 <ul>
                     <grocery-item 
                     v-for='item in groceryItems'
-                    v-bind:groceryitem='item'>
+                    v-bind:groceryitem='item'
+                    v-bind:key='item.id'>
                     </grocery-item>
                 </ul>
             </div>
@@ -199,21 +204,19 @@
 
             Vue.component('grocery-item', {
                 props: ['groceryitem'],
-                template: '<li>{{groceryitem.name}}: {{groceryitem.quantity}}</li>',
+                template: '<li :data-key="groceryitem.id">{{groceryitem.name}}: {{groceryitem.quantity}}</li>',
             });
 
             var groceryView = new Vue({
                 el: '#groceryDiv',
                 data: {
                     groceryItems: [
-                        {name: 'Bread', quantity: 2},
-                        {name: 'Cheese', quantity: 3},
-                        {name: 'Butter', quantity: 1},
+                        {id: 1, name: 'Bread', quantity: 2},
+                        {id: 2, name: 'Cheese', quantity: 3},
+                        {id: 3, name: 'Butter', quantity: 1},
                     ],
                 },
-            }
-
-            );
+            });
 
         </script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
