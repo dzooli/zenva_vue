@@ -1,0 +1,20 @@
+{
+  "name": "finalproject",
+  "version": "1.0.0",
+  "description": "Simple blog application using Vue",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue",
+    "blog",
+    "practice"
+  ],
+  "author": "Zoltan Fabian <zoltan.dzooli.fabian@gmail.com> (https://dzooli.blogspot.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "gitignore": "^0.6.0",
+    "vue": "^2.6.12"
+  }
+}
