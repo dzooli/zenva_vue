@@ -12,14 +12,19 @@
 
         <style>
             html, body {
-                padding: 12px;
+            }
+
+            .navbar {
+                margin-bottom: 16px;
+            }
+            .container {
                 clear: both;
                 float: left;
             }
             #post-title {
                 font-weight: bold;
             }
-            #post-date: {
+            #post-date {
                 float: right;
             }
             #post-user {
@@ -32,15 +37,22 @@
         </style>
     </head>
     <body>
-        <h1>Welcome to my Blog Site</h1>
-
-        <div id='blogPosts'>
-            <blog-post
-            v-for='post in posts'
-            :blogpost='post'
-            :key='post.id'
-            :datakey='post.id'
-            ></blog-post>
+        <!-- NavBar -->
+        
+        <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="navbar-brand"><i class="fas fa-home"></i> Welcome to my VueBlog</div>
+        </div>
+        
+        <!-- Content -->
+        <div class="container">
+            <div id='blogPosts'>
+                <blog-post
+                v-for='post in posts'
+                :blogpost='post'
+                :key='post.id'
+                :datakey='post.id'
+                ></blog-post>
+            </div>
         </div>
 
         <script>
