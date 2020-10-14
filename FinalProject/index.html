@@ -37,15 +37,17 @@
         <div id='blogPosts'>
             <blog-post
             v-for='post in posts'
-            v-bind:blogpost = 'post'
+            :blogpost='post'
+            :key='post.id'
+            :datakey='post.id'
             ></blog-post>
         </div>
 
         <script>
 
             Vue.component('blog-post', {
-                props: ['blogpost'],
-                template: `<div id='singleBlogPost' class="card">
+                props: ['blogpost', 'datakey'],
+                template: `<div id='singleBlogPost' class="card" :data-key="datakey">
                     <div class="card-body">
                     <div class="card-title">
                         <span id='post-title'>{{blogpost.title}}</span>
@@ -59,8 +61,8 @@
                 el: '#blogPosts',
                 data: {
                     posts: [
-                        {title: 'First post', username: 'Zoltan', date: '2020-10-15', content: 'This is the content of my very interesting first blog post using Vue. I hope you like it.'},
-                        {title: 'Second post', username: 'Zoltan Again', date: '2020-10-14', content: 'This is the content of my very interesting second blog post. Feel free to ask questions or contact me for further information.'},
+                        {id: 1, title: 'First post', username: 'Zoltan', date: '2020-10-15', content: 'This is the content of my very interesting first blog post using Vue. I hope you like it.'},
+                        {id: 2, title: 'Second post', username: 'Zoltan Again', date: '2020-10-14', content: 'This is the content of my very interesting second blog post. Feel free to ask questions or contact me for further information.'},
                     ],
                 },
             });
