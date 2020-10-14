@@ -100,6 +100,15 @@
                     </div>
                 </div>
             </form>
+            <h2>Basic component</h2>
+            <div id="groceryDiv">
+                <ul>
+                    <grocery-item 
+                    v-for='item in groceryItems'
+                    v-bind:groceryitem='item'>
+                    </grocery-item>
+                </ul>
+            </div>
         </div>
 
         <!-- Placeholder for the footer -->
@@ -187,6 +196,24 @@
                     }
                 }
             });
+
+            Vue.component('grocery-item', {
+                props: ['groceryitem'],
+                template: '<li>{{groceryitem.name}}: {{groceryitem.quantity}}</li>',
+            });
+
+            var groceryView = new Vue({
+                el: '#groceryDiv',
+                data: {
+                    groceryItems: [
+                        {name: 'Bread', quantity: 2},
+                        {name: 'Cheese', quantity: 3},
+                        {name: 'Butter', quantity: 1},
+                    ],
+                },
+            }
+
+            );
 
         </script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
