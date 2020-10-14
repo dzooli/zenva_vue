@@ -76,6 +76,30 @@
                     </div>
                 </div>
             </div>
+            <h2>(Almost) horizontal form</h2>
+            <form id="nameInputForm" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label" for="nameInputField">Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nameInputField" placeholder="Enter your name" maxlength="25"
+                            name="nameInputField" 
+                            v-model="userName" 
+                            onclick="$('#nameInputForm-userNameValidation').hide()"
+                            onfocus="$('#nameInputForm-userNameValidation').hide()"
+                            >
+                            <div id="nameInputForm-userNameValidation" class="invalid-feedback" hidden>Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Your name is:</label>
+                    <div class="col-sm-offset-2 col-sm-10">{{userName}}</div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-primary" @click="submitData">Submit</button>
+                    </div>
+                </div>
+            </form>
         </div>
 
         <!-- Placeholder for the footer -->
@@ -131,6 +155,37 @@
             firstDivView.$watch('number', function(value) {
                 $("#incButton").prop('disabled', (value >= firstDivView.$data.maxVal));
                 $("#decButton").prop('disabled', (value < firstDivView.$data.minVal + 1));
+            });
+
+            var nameInputVue = new Vue({
+                el: '#nameInputForm',
+                data: {
+                    userName: "",
+                },
+                methods: {
+                    initVisibility: function() {
+                        $("#nameInputForm-userNameValidation").hide();
+                    },
+                    initData: function() {
+                        this.userName = "";                        
+                    },
+                    validateData: function () {
+                        if (this.userName == "") {
+                            $("#nameInputForm-userNameValidation").prop('hidden', false);
+                            $("#nameInputForm-userNameValidation").show();
+                            return false;
+                        }
+                        return true;
+                    },
+                    submitData: function(event) {
+                        event.preventDefault();
+                        if (this.validateData()) {
+                            alert("Your data has been submitted\n" + JSON.stringify(this.$data));
+                            this.initVisibility();
+                            this.initData();
+                        }
+                    }
+                }
             });
 
         </script>
