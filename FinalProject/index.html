@@ -88,9 +88,15 @@
                             content: content,
                         };
                         this.$data.posts.push(entry);
-                    }
+                        this.reverseEntries();
+                    },
+                    reverseEntries: function() {
+                        this.$data.posts.sort(function (a, b) { return b.id - a.id });
+                    },
                 },
             });
+
+            blogView.reverseEntries();
 
             blogView.addEntry('Hello', 'Zoltan', 'Added entry');
 
