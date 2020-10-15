@@ -9,32 +9,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
             integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-
-        <style>
-            html, body {
-            }
-
-            .navbar {
-                margin-bottom: 16px;
-            }
-            .container {
-                clear: both;
-                float: left;
-            }
-            #post-title {
-                font-weight: bold;
-            }
-            #post-date {
-                float: right;
-            }
-            #post-user {
-                font-style: italic;
-            }
-            .card {
-                margin-bottom: 8px;
-            }
-
-        </style>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <!-- NavBar -->
@@ -101,7 +76,7 @@
                 el: '#blogPosts',
                 data: {
                     posts: [
-                        {id: 1, title: 'First post', username: 'Zoltan', date: '2020-10-15', content: 'This is the content of my very interesting first blog post using Vue. I hope you like it.'},
+                        {id: 1, title: 'First post', username: 'Zoltan', date: '2020-10-13', content: 'This is the content of my very interesting first blog post using Vue. I hope you like it.'},
                         {id: 2, title: 'Second post', username: 'Zoltan Again', date: '2020-10-14', content: 'This is the content of my very interesting second blog post. Feel free to ask questions or contact me for further information.'},
                     ],
                 },

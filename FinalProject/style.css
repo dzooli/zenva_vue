@@ -1,0 +1,27 @@
+html,
+body {
+}
+
+.navbar {
+  margin-bottom: 16px;
+}
+.container {
+  clear: both;
+  float: left;
+  background-color: rgb(122, 122, 122);
+  border-radius: 8px;
+  border: black solid 2px;
+  margin-left: 12px;
+}
+#post-title {
+  font-weight: bold;
+}
+#post-date {
+  float: right;
+}
+#post-user {
+  font-style: italic;
+}
+.card {
+  margin-bottom: 8px;
+}
