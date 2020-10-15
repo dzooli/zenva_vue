@@ -24,30 +24,32 @@
 
             <h2>New blog post</h2>
             <div class="card" style="padding: 8px;">
-                <div id="blogPostForm" class="form-vertical">
-                    <div class="form-group">
-                        <label class="control-label" for="usernameInput">Your Name: </label>
-                        <input id="usernameInput" name="usernameInput" class="form-control" type="text" maxlength="25" placeholder="Enter your name here..." required 
-                        v-model="user" onfocus="$('.username-invalid').removeClass('d-block');"/>
-                        <div class="username-invalid invalid-feedback">User name is required</div>
+                <form v-on:submit.prevent="postEntry">
+                    <div id="blogPostForm" class="form-vertical">
+                        <div class="form-group">
+                            <label class="control-label" for="usernameInput">Your Name: </label>
+                            <input id="usernameInput" name="usernameInput" class="form-control" type="text" maxlength="25" placeholder="Enter your name here..." required 
+                            v-model="user" onfocus="$('.username-invalid').removeClass('d-block');"/>
+                            <div class="username-invalid invalid-feedback">User name is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="titleInput">Post Title: </label>
+                            <input id="titleInput" name="titleInput" class="form-control" type="text" maxlength="30" placeholder="Your blogpost title..." required 
+                            v-model="title" onfocus="$('.title-invalid').removeClass('d-block');"/>
+                            <div class="title-invalid invalid-feedback">Post title is required</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="contentInput">Content: </label>
+                            <textarea id="contentInput" name="contentInput" class="form-control" maxlength="756" placeholder="blogpost content..."
+                                required v-model="content" onfocus="$('.content-invalid').removeClass('d-block');"></textarea>
+                            <div class="content-invalid invalid-feedback">Content is required</div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit" style="float: left; margin-right: 8px;">Post It!</button>
+                            <button class="btn btn-primary" @click="clearEntries" style="float: left;">Clear My Blog</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label" for="titleInput">Post Title: </label>
-                        <input id="titleInput" name="titleInput" class="form-control" type="text" maxlength="30" placeholder="Your blogpost title..." required 
-                        v-model="title" onfocus="$('.title-invalid').removeClass('d-block');"/>
-                        <div class="title-invalid invalid-feedback">Post title is required</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="contentInput">Content: </label>
-                        <textarea id="contentInput" name="contentInput" class="form-control" maxlength="756" placeholder="blogpost content..."
-                            required v-model="content" onfocus="$('.content-invalid').removeClass('d-block');"></textarea>
-                        <div class="content-invalid invalid-feedback">Content is required</div>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary" @click="postEntry" style="float: left; margin-right: 8px;">Post It!</button>
-                        <button class="btn btn-primary" @click="clearEntries" style="float: left;">Clear My Blog</button>
-                    </div>
-                </div>
+                </form>
             </div>
 
             <h2>Old posts</h2>
