@@ -8,10 +8,6 @@ body {
 .container {
   clear: both;
   float: left;
-  background-color: rgb(122, 122, 122);
-  border-radius: 8px;
-  border: black solid 2px;
-  margin-left: 12px;
 }
 #post-title {
   font-weight: bold;

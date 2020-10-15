@@ -28,17 +28,20 @@
                     <div class="form-group">
                         <label class="control-label" for="usernameInput">Your Name: </label>
                         <input id="usernameInput" name="usernameInput" class="form-control" type="text" maxlength="25" placeholder="Enter your name here..." required 
-                        v-model="user"/>
+                        v-model="user" onfocus="$('.username-invalid').removeClass('d-block');"/>
+                        <div class="username-invalid invalid-feedback">User name is required</div>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="titleInput">Post Title: </label>
                         <input id="titleInput" name="titleInput" class="form-control" type="text" maxlength="30" placeholder="Your blogpost title..." required 
-                        v-model="title"/>
+                        v-model="title" onfocus="$('.title-invalid').removeClass('d-block');"/>
+                        <div class="title-invalid invalid-feedback">Post title is required</div>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="contentInput">Content: </label>
                         <textarea id="contentInput" name="contentInput" class="form-control" maxlength="756" placeholder="blogpost content..."
-                            required v-model="content"></textarea>
+                            required v-model="content" onfocus="$('.content-invalid').removeClass('d-block');"></textarea>
+                        <div class="content-invalid invalid-feedback">Content is required</div>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary" @click="postEntry" style="float: left; margin-right: 8px;">Post It!</button>
@@ -108,13 +111,33 @@
                     user: '',
                     title: '',
                     content: '',
+                    dataValid: true,
                 },
                 methods: {
                     postEntry: function() {
+                        this.validate();
+                        if (!this.dataValid) {
+                            return;
+                        }
                         blogView.addEntry(this.title, this.user, this.content);
                     },
                     clearEntries: function() {
                         blogView.$data.posts = [];
+                    },
+                    validate: function() {
+                        this.dataValid = true;
+                        if (!this.user || this.user == "") {
+                            $(".username-invalid").addClass('d-block');
+                            this.dataValid = false;
+                        }
+                        if (!this.title || this.title == "") {
+                            $(".title-invalid").addClass('d-block');
+                            this.dataValid = false;
+                        }
+                        if (!this.content || this.content == "") {
+                            $(".content-invalid").addClass('d-block');
+                            this.dataValid = false;
+                        }
                     }
                 },
             });
