@@ -44,7 +44,35 @@
         </div>
         
         <!-- Content -->
+
         <div class="container">
+
+            <h2>New blog post</h2>
+            <div class="card" style="padding: 8px;">
+                <div id="blogPostForm" class="form-vertical">
+                    <div class="form-group">
+                        <label class="control-label" for="usernameInput">Your Name: </label>
+                        <input id="usernameInput" name="usernameInput" class="form-control" type="text" maxlength="25" placeholder="Enter your name here..." required 
+                        v-model="user"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="titleInput">Post Title: </label>
+                        <input id="titleInput" name="titleInput" class="form-control" type="text" maxlength="30" placeholder="Your blogpost title..." required 
+                        v-model="title"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="contentInput">Content: </label>
+                        <textarea id="contentInput" name="contentInput" class="form-control" maxlength="756" placeholder="blogpost content..."
+                            required v-model="content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" @click="postEntry" style="float: left;">Post It!</button>
+                        <button class="btn btn-primary" @click="clearEntries" style="float: right;">Reset</button>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Old posts</h2>
             <div id='blogPosts'>
                 <blog-post
                 v-for='post in posts'
@@ -88,17 +116,38 @@
                             content: content,
                         };
                         this.$data.posts.push(entry);
-                        this.reverseEntries();
                     },
                     reverseEntries: function() {
                         this.$data.posts.sort(function (a, b) { return b.id - a.id });
                     },
                 },
+                mounted: function() {
+                    this.reverseEntries();
+                },
+                updated: function() {
+                    this.reverseEntries();
+                }
             });
 
-            blogView.reverseEntries();
+            var blogForm = new Vue({
+                el: '#blogPostForm',
+                data: {
+                    user: '',
+                    title: '',
+                    content: '',
+                },
+                methods: {
+                    postEntry: function() {
+                        blogView.addEntry(this.title, this.user, this.content);
+                    },
+                    clearEntries: function() {
+                        blogView.$data.posts = [];
+                    }
+                },
+            });
 
-            blogView.addEntry('Hello', 'Zoltan', 'Added entry');
+            // example call
+            blogView.addEntry('Hello', 'Zoltan', 'Added entry after initialization. Should be removed with the Reset button.');
 
         </script>
         <!-- Bootstrap scripts -->
