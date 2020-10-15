@@ -66,8 +66,8 @@
                             required v-model="content"></textarea>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary" @click="postEntry" style="float: left;">Post It!</button>
-                        <button class="btn btn-primary" @click="clearEntries" style="float: right;">Reset</button>
+                        <button class="btn btn-primary" @click="postEntry" style="float: left; margin-right: 8px;">Post It!</button>
+                        <button class="btn btn-primary" @click="clearEntries" style="float: left;">Clear My Blog</button>
                     </div>
                 </div>
             </div>
@@ -116,6 +116,7 @@
                             content: content,
                         };
                         this.$data.posts.push(entry);
+                        this.reverseEntries();
                     },
                     reverseEntries: function() {
                         this.$data.posts.sort(function (a, b) { return b.id - a.id });
@@ -124,9 +125,6 @@
                 mounted: function() {
                     this.reverseEntries();
                 },
-                updated: function() {
-                    this.reverseEntries();
-                }
             });
 
             var blogForm = new Vue({
